@@ -3348,7 +3348,7 @@ static bool8 SelectNextPreset(struct TrainerPartyScratch* scratch, u16 species, 
             if(IsTerastallizeEnabled())
             {
                 // Avoid black sludge during tera because it's a bit silly
-                outPreset->heldItem == ITEM_LEFTOVERS;
+                outPreset->heldItem = ITEM_LEFTOVERS;
             }
         }
         else if(outPreset->heldItem >= ITEM_VENUSAURITE && outPreset->heldItem <= ITEM_DIANCITE)
