@@ -1054,7 +1054,7 @@ bool8 Query_IsSpeciesEnabled(u16 species)
         else if(species > FORMS_START)
         {
             // Regional forms
-            if(species >= SPECIES_RATTATA_ALOLAN && species <= SPECIES_STUNFISK_GALARIAN)
+            if(species >= SPECIES_RATTATA_ALOLAN && species <= SPECIES_DECIDUEYE_HISUIAN)
                 return Query_IsSpeciesEnabledInternal(species);
 
             // Alt forms
