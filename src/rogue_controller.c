@@ -218,7 +218,7 @@ static void ClearHoneyTreePokeblock(void);
 
 static void SetupTrainerBattleInternal(u16 trainerNum);
 
-const char *natureCheckTable[25]=
+const char natureCheckTable[25]=
 {
     NATURE_HARDY,
     NATURE_LONELY,
@@ -7182,7 +7182,7 @@ void Rogue_ApplyMonCompetitiveSet(struct Pokemon* mon, u8 level, struct RoguePok
     if(!rules->skipNature)
     {
         u8 compNature = 0;
-        while (compNature<26 && preset->nature!=natureCheckTable[compNature]) ++compNature;            
+        while (compNature<26 && *preset->nature!=*natureCheckTable[compNature]) ++compNature;            
         SetNature(mon, compNature);
     }
        
