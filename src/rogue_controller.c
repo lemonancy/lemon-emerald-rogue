@@ -218,6 +218,7 @@ static void ClearHoneyTreePokeblock(void);
 
 static void SetupTrainerBattleInternal(u16 trainerNum);
 
+/*
 const char natureCheckTable[25]=
 {
     NATURE_HARDY,
@@ -246,7 +247,7 @@ const char natureCheckTable[25]=
     NATURE_CAREFUL,
     NATURE_QUIRKY
 };
-
+*/
 u16 RogueRandomRange(u16 range, u8 flag)
 {
     // Always use rogue random to avoid seeding issues based on flag
