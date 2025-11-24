@@ -7149,7 +7149,7 @@ void Rogue_ApplyMonCompetitiveSet(struct Pokemon* mon, u8 level, struct RoguePok
         }
     }
 
-    // Lemon's ability fix
+    // Lemon's nature fix
     if(!rules->skipNature)
     {
         if(preset->nature != NATURE_NONE)
