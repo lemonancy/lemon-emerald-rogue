@@ -7154,7 +7154,7 @@ void Rogue_ApplyMonCompetitiveSet(struct Pokemon* mon, u8 level, struct RoguePok
     {
         if(preset->nature != NATURE_NONE)
         {
-            SetMonData(mon, MON_DATA_NATURE, &preset->nature);
+            SetNature(mon, &preset->nature);
         }
     }
        
