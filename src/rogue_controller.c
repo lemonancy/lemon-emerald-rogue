@@ -218,7 +218,7 @@ static void ClearHoneyTreePokeblock(void);
 
 static void SetupTrainerBattleInternal(u16 trainerNum);
 
-const string natureCheckTable[NUM_NATURES]=
+const string[] natureCheckTable[NUM_NATURES]=
 {
     "NATURE_HARDY",
     "NATURE_LONELY",
