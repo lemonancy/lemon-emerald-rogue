@@ -218,6 +218,35 @@ static void ClearHoneyTreePokeblock(void);
 
 static void SetupTrainerBattleInternal(u16 trainerNum);
 
+const string natureCheckTable[NUM_NATURES]=
+{
+    "NATURE_HARDY",
+    "NATURE_LONELY",
+    "NATURE_BRAVE",
+    "NATURE_ADAMANT",
+    "NATURE_NAUGHTY",
+    "NATURE_BOLD",
+    "NATURE_DOCILE",
+    "NATURE_RELAXED",
+    "NATURE_IMPISH",
+    "NATURE_LAX",
+    "NATURE_TIMID",
+    "NATURE_HASTY",
+    "NATURE_SERIOUS",
+    "NATURE_JOLLY",
+    "NATURE_NAIVE",
+    "NATURE_MODEST",
+    "NATURE_MILD",
+    "NATURE_QUIET",
+    "NATURE_BASHFUL",
+    "NATURE_RASH",
+    "NATURE_CALM",
+    "NATURE_GENTLE",
+    "NATURE_SASSY",
+    "NATURE_CAREFUL",
+    "NATURE_QUIRKY"
+};
+
 u16 RogueRandomRange(u16 range, u8 flag)
 {
     // Always use rogue random to avoid seeding issues based on flag
@@ -7152,7 +7181,8 @@ void Rogue_ApplyMonCompetitiveSet(struct Pokemon* mon, u8 level, struct RoguePok
     // Lemon's nature fix
     if(!rules->skipNature)
     {
-        u8 compNature = &preset->nature;
+        u8 compNature = 0;
+        while (compNature<26 && &preset->nature!=natureCheckTable[compNature]) ++compnature;            
         SetNature(mon, compNature);
     }
        
