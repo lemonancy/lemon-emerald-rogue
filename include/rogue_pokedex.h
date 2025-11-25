@@ -30,6 +30,7 @@ u16 RoguePokedex_CountCaughtMonsForVariant(u16 variant, u8 caseID);
 u16 RoguePokedex_CountCurrentCaughtMons(u8 caseID);
 u16 RoguePokedex_CountNationalCaughtMons(u8 caseID);
 
+bool8 RoguePokedex_IsSpeciesParadox(u16 species);
 bool8 RoguePokedex_IsSpeciesLegendary(u16 species);
 bool8 RoguePokedex_IsSpeciesValidBoxLegendary(u16 species);
 bool8 RoguePokedex_IsSpeciesValidRoamerLegendary(u16 species);

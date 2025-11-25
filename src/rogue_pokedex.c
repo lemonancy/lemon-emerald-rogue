@@ -4022,6 +4022,48 @@ u16 RoguePokedex_RedirectSpeciesGetSetFlag(u16 species)
     return species;
 }
 
+bool8 RoguePokedex_IsSpeciesParadox(u16 species)
+{
+#ifdef ROGUE_EXPANSION
+    species = GET_BASE_SPECIES_ID(species);
+#endif
+
+    switch(species)
+    {
+	#ifdef ROGUE_EXPANSION
+		case SPECIES_GREAT_TUSK:
+		case SPECIES_SCREAM_TAIL:
+		case SPECIES_BRUTE_BONNET:
+		case SPECIES_FLUTTER_MANE:
+		case SPECIES_SLITHER_WING:
+		case SPECIES_SANDY_SHOCKS:
+		case SPECIES_IRON_TREADS:
+		case SPECIES_IRON_BUNDLE:
+		case SPECIES_IRON_HANDS:
+		case SPECIES_IRON_JUGULIS:
+		case SPECIES_IRON_MOTH:
+		case SPECIES_IRON_THORNS:
+		case SPECIES_ROARING_MOON:
+		case SPECIES_IRON_VALIANT:
+		
+        case SPECIES_KORAIDON:
+        case SPECIES_MIRAIDON:
+		
+        case SPECIES_WALKING_WAKE:
+        case SPECIES_IRON_LEAVES:
+
+        case SPECIES_GOUGING_FIRE:
+        case SPECIES_RAGING_BOLT:
+        case SPECIES_IRON_BOULDER:
+        case SPECIES_IRON_CROWN:
+
+#endif
+            return TRUE;
+    };
+
+    return FALSE;
+}
+
 bool8 RoguePokedex_IsSpeciesLegendary(u16 species)
 {
 #ifdef ROGUE_EXPANSION
