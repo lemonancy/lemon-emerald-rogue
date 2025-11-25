@@ -16132,6 +16132,66 @@ void BS_TrySymbiosis(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+static bool32 BattlerHasPositiveStatChanges(u32 battler)
+{
+    u32 i = 0;
+    for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+    {
+        if (gBattleMons[battler].statStages[i] > DEFAULT_STAT_STAGE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void BS_TrySpectralThief(void)
+{
+    NATIVE_ARGS(const u8 *spectralThiefSteal);
+    u32 moveType, i;
+    u32 targetAbility = GetBattlerAbility(gBattlerTarget);
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    if(gBattleScripting.moveEffect == MOVE_EFFECT_SPECTRAL_THIEF && BattlerHasPositiveStatChanges(gBattlerTarget) && CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, targetAbility, FALSE))
+    {
+        // Target has positive stats changes and isn't immune to our move, let's steal their buff
+        gBattleStruct->stolenStats[0] = 0; // Stats to steal.
+        gBattleScripting.animArg1 = 0;
+        for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+        {
+            if (gBattleMons[gBattlerTarget].statStages[i] > DEFAULT_STAT_STAGE && gBattleMons[gBattlerAttacker].statStages[i] != MAX_STAT_STAGE)
+            {
+                bool32 byTwo = FALSE;
+                gBattleStruct->stolenStats[0] |= gBitTable[i];
+                // Store by how many stages to raise the stat.
+                gBattleStruct->stolenStats[i] = gBattleMons[gBattlerTarget].statStages[i] - DEFAULT_STAT_STAGE;
+                while (gBattleMons[gBattlerAttacker].statStages[i] + gBattleStruct->stolenStats[i] > MAX_STAT_STAGE)
+                    gBattleStruct->stolenStats[i]--;
+                gBattleMons[gBattlerTarget].statStages[i] = DEFAULT_STAT_STAGE;
+                if (gBattleStruct->stolenStats[i] >= 2)
+                    byTwo++;
+                if (gBattleScripting.animArg1 == 0)
+                {
+                    if (byTwo)
+                        gBattleScripting.animArg1 = STAT_ANIM_PLUS2 + i;
+                    else
+                        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + i;
+                }
+                else
+                {
+                    if (byTwo)
+                        gBattleScripting.animArg1 = STAT_ANIM_MULTIPLE_PLUS2;
+                    else
+                        gBattleScripting.animArg1 = STAT_ANIM_MULTIPLE_PLUS1;
+                }
+            }
+        }
+        gBattleScripting.moveEffect = 0;
+        gBattlescriptCurrInstr = cmd->spectralThiefSteal;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
 
 void BS_SetZEffect(void)
 {
