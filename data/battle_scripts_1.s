@@ -3452,7 +3452,7 @@ BattleScript_HitFromAtkString::
 	ppreduce
 BattleScript_HitFromCritCalc::
 	critcalc
-	handleSpectralThief BattleScript_SpectralThiefSteal@Spectral thief is special among the special cases, so we'll use this solution for now
+	handleSpectralThief BattleScript_SpectralThiefSteal
 BattleScript_HitFromDamageCalc::
 	damagecalc
 	adjustdamage
