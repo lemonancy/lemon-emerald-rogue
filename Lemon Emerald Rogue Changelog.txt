@@ -1,0 +1,30 @@
+Lemon ER Changelist
+
+2.01L (The first Lemon patch)
+	MISSED FEATURES
+		Nature Fix
+			Previously, natures were always random. This is because natures were never set to competitive natures despite code indicating that they should.  This has now been fixed.
+		Missing Pokemon
+			Previously, pecharunt, zorua-h, and growlithe-ha were unavailable. No Nut November is over, and Hamilton and Baguera have been fixed as spawns, thanks to Mocha's fix.
+			Additionally, added routes for the Galarian birds to spawn normally. Now you shouldn't have to find them only through Wahey.
+		Missing Evolutions
+			Previously, eevee could not evolve to sylveon. Copied Mocha's sylveon fix.
+	BUGFIXES
+		Armor Tail / Dazzling / Queenly Majesty
+			Previously, these abilities did not protect the partner pokemon despite doing so in live. Skolgrahd's fix has been implemented.
+		Shed Tail
+			Previously, Shed Tail was creating a substitute with 50% of cyclizar's max HP and not 25%. I've implemented iriv24's fix.
+		Soul Heart
+			Previously, Soul Heart's boosts landed on the wrong pokemon. DizzyEgg's Soul Heart fix has been implemented.
+		Spectral Thief
+			Previously, Spectral Thief only stole boosts if it did not KO the target. Kleen's Spectral Thief fix has been implemented.
+	OTHER
+		Commander
+			Changed the ability description of Commander to reflect that it doesn't work.
+	UPCOMING
+		Booster Energy
+			Literally going to be trying to get it working later this week. Expect this for 2.02L.
+		Commander
+			Probably not. Fucking hate tatsugiri
+		Disguise
+			Maybe. There are like six bugs with this ability and idk if I want to try to get it working :)
