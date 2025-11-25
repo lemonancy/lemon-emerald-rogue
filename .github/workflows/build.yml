@@ -1,13 +1,6 @@
-name: CI
+name: Compile
 
-on:
-  push:
-    branches:
-      - vanilla
-      - vanilla-dev
-      - expansion
-      - expansion-dev
-  pull_request:
+on: workflow_dispatch
 
 jobs:
   build:
@@ -18,23 +11,23 @@ jobs:
       GAME_LANGUAGE: ENGLISH
       MODERN: 0
       COMPARE: 0
-      AUTOMATION_HOST: GITHUB
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
 
       - name: Checkout agbcc
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
         with:
           path: agbcc
           repository: pret/agbcc
 
       - name: Install binutils
-        run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi libelf-dev
-        # build-essential, git, and libpng-dev are already installed
+        run: |
+          sudo apt install -y gcc-arm-none-eabi binutils-arm-none-eabi libpng-dev libelf-dev
+        # build-essential and git are already installed
         # gcc-arm-none-eabi is only needed for the modern build
         # as an alternative to dkP
-
+        
       - name: Install Dependencies
         run: |
           ./init_deps.sh
@@ -45,29 +38,38 @@ jobs:
           ./install.sh ../
         working-directory: agbcc
 
-      - name: Build Debug
+      - name: Modern
         env:
+          MODERN: 1
+          COMPARE: 0
           RELEASE: 0
         run: make -j${nproc} -O all
+        # change RELEASE to 0 to compile debug
 
-      - name: Build Release
-        env:
-          RELEASE: 1
-        run: make -j${nproc} -O all
+      #- name: Test
+      #  env:
+      #    MODERN: 1
+      #    TEST: 1
+      #  run: |
+      #    make -j${nproc} -O pokeemerald-test.elf
+      #    make -j${nproc} check
+          # Test step, commented out by default to minimise the time to compile 
 
-      - name: Update Memory Stats
-        uses: actions/upload-artifact@v3
+        # delete or comment out code below this point to prevent uploading to github if using workflow purely for testing.
+      - uses: actions/upload-artifact@v4
         with:
-          name: Memory Stats
-          path: pokeemerald_memorystats.csv
-
-      # - name: Modern
-      #   env:
-      #     MODERN: 1
-      #     COMPARE: 0
-      #   run: make -j${nproc} -O all
-
-      # - name: Test
-      #   run: |
-      #     make -j${nproc} -O pokeemerald-test.elf
-      #     make -j${nproc} check
+            name: lemon-emerald-rogue
+            path: lemon-emerald-rogue.gba
+            retention-days: 1
+  
+      - uses: actions/upload-artifact@v4
+        with:
+            name: lemon-emerald-rogue_elf
+            path: lemon-emerald-rogue.elf
+            retention-days: 1
+            
+      - uses: actions/upload-artifact@v4
+        with:
+            name: lemon-emerald-rogue_map
+            path: lemon-emerald-rogue.map
+            retention-days: 1
