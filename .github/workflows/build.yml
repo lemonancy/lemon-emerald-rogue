@@ -1,10 +1,6 @@
 name: Compile
 
-on:
-  push:
-    branches:
-      - vanilla-dev
-  pull_request:
+on: workflow_dispatch
 
 jobs:
   build:
@@ -42,11 +38,11 @@ jobs:
           ./install.sh ../
         working-directory: agbcc
 
-      - name: Vanilla
+      - name: Modern
         env:
-          MODERN: 0
+          MODERN: 1
           COMPARE: 0
-          RELEASE: 1
+          RELEASE: 0
         run: make -j${nproc} -O all
         # change RELEASE to 0 to compile debug
 
@@ -62,18 +58,18 @@ jobs:
         # delete or comment out code below this point to prevent uploading to github if using workflow purely for testing.
       - uses: actions/upload-artifact@v4
         with:
-            name: lemon-emerald-rogue-vanilla
-            path: lemon-emerald-rogue-vanilla.gba
+            name: lemon-emerald-rogue
+            path: lemon-emerald-rogue.gba
             retention-days: 1
   
       - uses: actions/upload-artifact@v4
         with:
-            name: lemon-emerald-rogue-vanilla_elf
-            path: lemon-emerald-rogue-vanilla.elf
+            name: lemon-emerald-rogue_elf
+            path: lemon-emerald-rogue.elf
             retention-days: 1
             
       - uses: actions/upload-artifact@v4
         with:
-            name: lemon-emerald-rogue-vanilla_map
-            path: lemon-emerald-rogue-vanilla.map
+            name: lemon-emerald-rogue_map
+            path: lemon-emerald-rogue.map
             retention-days: 1
