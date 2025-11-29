@@ -1,6 +1,10 @@
 name: Compile
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - vanilla-dev
+  pull_request:
 
 jobs:
   build:
@@ -38,7 +42,7 @@ jobs:
           ./install.sh ../
         working-directory: agbcc
 
-      - name: Modern
+      - name: Vanilla
         env:
           MODERN: 1
           COMPARE: 0
