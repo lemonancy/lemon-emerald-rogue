@@ -58,18 +58,18 @@ jobs:
         # delete or comment out code below this point to prevent uploading to github if using workflow purely for testing.
       - uses: actions/upload-artifact@v4
         with:
-            name: lemon-emerald-rogue
-            path: lemon-emerald-rogue.gba
+            name: lemon-emerald-rogue-vanilla
+            path: lemon-emerald-rogue-vanilla.gba
             retention-days: 1
   
       - uses: actions/upload-artifact@v4
         with:
-            name: lemon-emerald-rogue_elf
-            path: lemon-emerald-rogue.elf
+            name: lemon-emerald-rogue-vanilla_elf
+            path: lemon-emerald-rogue-vanilla.elf
             retention-days: 1
             
       - uses: actions/upload-artifact@v4
         with:
-            name: lemon-emerald-rogue_map
-            path: lemon-emerald-rogue.map
+            name: lemon-emerald-rogue-vanilla_map
+            path: lemon-emerald-rogue-vanilla.map
             retention-days: 1
