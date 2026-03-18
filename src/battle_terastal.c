@@ -4,6 +4,7 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_terastal.h"
+#include "battle_util.h"
 #include "event_data.h"
 #include "item.h"
 #include "palette.h"
@@ -169,19 +170,13 @@ uq4_12_t GetTeraMultiplier(u32 battler, u32 type)
     // Base and Tera type.
     if (type == teraType && IS_BATTLER_OF_BASE_TYPE(battler, type))
     {
-        if (hasAdaptability)
-            return UQ_4_12(2.25);
-        else
-            return UQ_4_12(2.0);
+		return uq4_12_add(hasAdaptability ? UQ_4_12(2.25) : UQ_4_12(2.0), GetAdaptabilityCharmBoost(battler));
     }
     // Base or Tera type only.
     else if ((type == teraType && !IS_BATTLER_OF_BASE_TYPE(battler, type))
              || (type != teraType && IS_BATTLER_OF_BASE_TYPE(battler, type)))
     {
-        if (hasAdaptability)
-            return UQ_4_12(2.0);
-        else
-            return UQ_4_12(1.5);
+       return uq4_12_add(hasAdaptability ? UQ_4_12(2.0) : UQ_4_12(1.5), GetAdaptabilityCharmBoost(battler));
     }
     // Neither base or Tera type.
     else

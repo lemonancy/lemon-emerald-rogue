@@ -9940,7 +9940,7 @@ static inline uq4_12_t GetParentalBondModifier(u32 battlerAtk)
     return B_PARENTAL_BOND_DMG >= GEN_7 ? UQ_4_12(0.25) : UQ_4_12(0.5);
 }
 
-static inline uq4_12_t GetAdaptabilityCharmBoost(u32 battlerAtk)
+static inline uq4_12_t GetAdaptabilityCharmBoostInternal(uq4_12_t battlerAtk)
 {
     u16 adaptabilityBoost = 0;
     uq4_12_t charmModifier = UQ_4_12(0.0);
@@ -9961,6 +9961,13 @@ static inline uq4_12_t GetAdaptabilityCharmBoost(u32 battlerAtk)
     }
 
     return charmModifier;
+}
+
+uq4_12_t GetAdaptabilityCharmBoost(u32 battlerAtk)
+{
+	uq4_12_t modifier = UQ_4_12(1.0);
+	modifier = GetAdaptabilityCharmBoostInternal(battlerAtk);
+	return modifier;
 }
 
 static inline uq4_12_t GetSameTypeAttackBonusModifier(u32 battlerAtk, u32 moveType, u32 move, u32 abilityAtk)
