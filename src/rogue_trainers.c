@@ -2065,6 +2065,9 @@ static u8 CreateTrainerPartyInternal(u16 trainerNum, struct Pokemon* party, u8 m
 
     // Fill defaults before we configure the scratch
     scratch.trainerNum = trainerNum;
+	scratch.heldItems.hasLeftovers = FALSE;
+	scratch.heldItems.hasShellbell = FALSE;
+	scratch.heldItems.hasChoiceItem = FALSE;
     scratch.party = party;
     scratch.partyCapacity = monCapacity;
     scratch.partyCount = startIndex;
